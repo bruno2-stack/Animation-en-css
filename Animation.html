@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boîtes Animées</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        /* Style de base pour toutes les boîtes */
+        .boite {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .boite p {
+            line-height: 1.6;
+            color: #333;
+            text-align: justify;
+        }
+
+        /* Animation 1: Élévation douce */
+        .boite-elevation:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Animation 2: Rotation légère */
+        .boite-rotation:hover {
+            transform: rotate(2deg) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        /* Animation 3: Agrandissement */
+        .boite-scale:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        /* Animation 4: Inclinaison */
+        .boite-skew:hover {
+            transform: skewX(-2deg) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        /* Animation 5: Flip 3D */
+        .boite-flip {
+            perspective: 1000px;
+        }
+
+        .boite-flip:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Animation 6: Bounce */
+        .boite-bounce:hover {
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Animation 7: Pulse */
+        .boite-pulse:hover {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Animation 8: Shake */
+        .boite-shake:hover {
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-3px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translateX(3px);
+            }
+        }
+
+        /* Animation 9: Glow */
+        .boite-glow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2), 0 0 30px rgba(102, 126, 234, 0.5);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Animation 10: Slide et couleur */
+        .boite-slide {
+            background: linear-gradient(45deg, #fff, #fff);
+            background-size: 300% 300%;
+            transition: all 0.4s ease, background-position 0.4s ease;
+        }
+
+        .boite-slide:hover {
+            transform: translateX(10px) translateY(-5px);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 300%;
+            background-position: 100% 100%;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .boite-slide:hover p {
+            color: white;
+        }
+
+        /* Animation 11: Morphing */
+        .boite-morph:hover {
+            transform: scale(1.03);
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .boite-morph:hover p {
+            color: white;
+        }
+
+        /* Animation 12: Flip complet */
+        .boite-flip-complete {
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+
+        .boite-flip-complete:hover {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>FAMBO Bruno avec les animations</h1>
+    <h1> Animations de boîtes au survol</h1>
+    
+    <div class="container">
+        <div>
+            <h2>Élévation douce</h2>
+            <section class="boite boite-elevation">
+                <p>Passez votre curseur sur cette boîte pour voir une élévation douce et élégante.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Rotation légère</h2>
+            <section class="boite boite-rotation">
+                <p>Cette boîte effectue une rotation subtile avec un léger agrandissement.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Agrandissement</h2>
+            <section class="boite boite-scale">
+                <p>Un simple mais efficace effet d'agrandissement pour attirer l'attention.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Inclinaison</h2>
+            <section class="boite boite-skew">
+                <p>Une inclinaison créative qui donne un effet dynamique et moderne.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Flip 3D</h2>
+            <section class="boite boite-flip">
+                <p>Un effet de perspective 3D qui simule une rotation dans l'espace.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Bounce</h2>
+            <section class="boite boite-bounce">
+                <p>Un effet de rebond ludique qui ajoute de la personnalité à vos éléments.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Pulse</h2>
+            <section class="boite boite-pulse">
+                <p>Un battement rythmé qui attire l'œil de manière subtile.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Shake</h2>
+            <section class="boite boite-shake">
+                <p>Un tremblement énergique pour des interactions plus dynamiques.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Glow</h2>
+            <section class="boite boite-glow">
+                <p>Un effet lumineux qui fait briller vos éléments avec style.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Slide coloré</h2>
+            <section class="boite boite-slide">
+                <p>Une translation avec un changement de couleurs progressif et élégant.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Morphing</h2>
+            <section class="boite boite-morph">
+                <p>Une transformation complète de forme et de couleur pour un effet saisissant.</p>
+            </section>
+        </div>
+
+        <div>
+            <h2>Flip complet</h2>
+            <section class="boite boite-flip-complete">
+                <p>Une rotation complète sur 180 degrés pour révéler l'envers de la carte.</p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
